@@ -12,7 +12,6 @@ function createPromise(position, delay) {
   });
 }
 
-// Handling form submission
 document.getElementById('promise-form').addEventListener('submit', (event) => {
   event.preventDefault();
 

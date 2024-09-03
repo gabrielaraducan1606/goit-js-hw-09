@@ -2,12 +2,10 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import throttle from "lodash.throttle";
 
-// Funcția pentru a adăuga zero în fața numerelor mai mici de 10
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
 
-// Funcția de conversie a milisecundelor
 function convertMs(ms) {
   const second = 1000;
   const minute = second * 60;
@@ -22,7 +20,6 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-// Inițializare flatpickr
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -50,7 +47,6 @@ const secondsElement = document.querySelector('[data-seconds]');
 let timerId = null;
 let selectedDate = null;
 
-// Funcția pentru a actualiza cronometrul
 function updateClock() {
   const currentTime = new Date();
   const timeDifference = selectedDate - currentTime;
@@ -70,25 +66,21 @@ function updateClock() {
   secondsElement.textContent = addLeadingZero(seconds);
 }
 
-// Funcția pentru a începe numărătoarea inversă
 function startCountdown() {
   if (selectedDate) {
     startButton.disabled = true;
     timerId = setInterval(updateClock, 1000);
-    updateClock(); // Inițializare imediată
+    updateClock(); 
   }
 }
 
-// Funcția pentru a opri numărătoarea inversă
 function stopCountdown() {
   clearInterval(timerId);
   timerId = null;
   startButton.disabled = false;
 }
 
-// Evenimentele butoanelor
 startButton.addEventListener('click', startCountdown);
 stopButton.addEventListener('click', stopCountdown);
 
-// Inițializare butoane
 stopButton.disabled = true;
